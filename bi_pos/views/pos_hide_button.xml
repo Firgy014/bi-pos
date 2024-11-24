@@ -1,0 +1,17 @@
+<odoo>
+    <template id="hide_discount_button" inherit_id="point_of_sale.assets_common" name="Hide Discount Button">
+        <xpath expr="." position="inside">
+            <style>
+                /* Hide the button with % Disc text */
+                button.mode-button {
+                    display: none !important;
+                }
+
+                /* Show the button with text % Disc */
+                button.mode-button:contains('% Disc') {
+                    display: inline !important;
+                }
+            </style>
+        </xpath>
+    </template>
+</odoo>
