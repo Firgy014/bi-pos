@@ -1,17 +1,21 @@
 <odoo>
-    <template id="hide_discount_button" inherit_id="point_of_sale.assets_common" name="Hide Discount Button">
-        <xpath expr="." position="inside">
-            <style>
-                /* Hide the button with % Disc text */
-                button.mode-button {
-                    display: none !important;
-                }
-
-                /* Show the button with text % Disc */
-                button.mode-button:contains('% Disc') {
-                    display: inline !important;
-                }
-            </style>
-        </xpath>
-    </template>
+    <record id="pos_config_form_view" model="ir.ui.view">
+        <field name="name">pos.config.form.view</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='title']" position="after">
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="visible_backspace_btn"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="visible_backspace_btn"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
 </odoo>

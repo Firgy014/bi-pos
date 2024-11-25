@@ -1,19 +1,16 @@
-odoo.define('bi_pos.hide_price_discount', function (require) {
+odoo.define('bi_pos.pos_button_restrict', function (require) {
     "use strict";
 
-    var PosModel = require('point_of_sale.PosModel');
-    var _super = PosModel.prototype;
+    const PosGlobalState = require('point_of_sale.models').PosGlobalState;
+    const Registries = require('point_of_sale.Registries');
 
-    PosModel = PosModel.extend({
-        load_server_data: function () {
-            var self = this;
-            return _super.load_server_data.apply(this, arguments).then(function () {
-                // Menyembunyikan tombol diskon jika teksnya mengandung '% Disc'
-                var discButton = document.querySelector("button.mode-button");
-                if (discButton && discButton.textContent.includes('% Disc')) {
-                    discButton.style.display = 'none';
-                }
-            });
-        },
-    });
+    const PosButtonRestrict = (PosGlobalState) =>
+        class PosButtonRestrict extends PosGlobalState {
+            async _processData(loadedData) {
+                await super._processData(...arguments);
+                this.visible_backspace_btn = loadedData['visible_backspace_btn'];
+            }
+        };
+
+    Registries.Model.extend(PosGlobalState, PosButtonRestrict);
 });

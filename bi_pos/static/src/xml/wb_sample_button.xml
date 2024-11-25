@@ -1,0 +1,55 @@
+<templates id="template" inherit_id="point_of_sale.template" xml:space="preserve">
+
+    <t t-name="NumpadWidget" t-inherit="point_of_sale.NumpadWidget" t-inherit-mode="extension" owl="1">
+        <!-- <xpath expr="//button[hasclass('numpad-backspace')]" position="replace">
+            
+            <button t-if="env and env.pos and env.pos.visible_backspace_btn" class="input-button numpad-backspace" t-on-click="() => this.sendInput('Backspace')">
+                <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png"
+                        width="24" height="21" alt="Backspace" />
+            </button>
+        </xpath> -->
+
+        <xpath expr="//button[hasclass('mode-button') and contains(text(), 'Price')]" position="replace">
+            
+            <button t-if="env and env.pos and env.pos.visible_price_btn" class="mode-button" t-att-class="{
+                    'selected-mode': props.activeMode === 'price',
+                    'disabled-mode': !hasPriceControlRights
+                }" t-att-disabled="!hasPriceControlRights"
+                t-on-click="() => this.changeMode('price')">Price</button>
+        </xpath>
+
+        <xpath expr="//button[hasclass('mode-button') and contains(text(), '% Disc')]" position="replace">
+            
+            <button t-if="env and env.pos and env.pos.visible_price_btn" class="mode-button" t-att-class="{
+                    'selected-mode': props.activeMode === 'discount',
+                    'disabled-mode': !hasPriceControlRights
+                }" t-att-disabled="!hasPriceControlRights"
+                t-on-click="() => this.changeMode('price')">% Disc</button>
+        </xpath>
+    </t>
+
+    <t t-name="PaymentScreenNumpad" owl="1">
+        <div class="numpad">
+            <PSNumpadInputButton value="10000" text="'+10.000'" changeClassTo="'mode-button'" />
+            <PSNumpadInputButton value="20000" text="'+20.000'" changeClassTo="'mode-button'" />
+            <PSNumpadInputButton value="50000" text="'+50.000'" changeClassTo="'mode-button'" />
+            <PSNumpadInputButton value="'1'" />
+            <PSNumpadInputButton value="'2'" />
+            <PSNumpadInputButton value="'3'" />
+            <PSNumpadInputButton value="'4'" />
+            <PSNumpadInputButton value="'5'" />
+            <PSNumpadInputButton value="'6'" />
+            <PSNumpadInputButton value="'7'" />
+            <PSNumpadInputButton value="'8'" />
+            <PSNumpadInputButton value="'9'" />
+            <PSNumpadInputButton value="'-'" text="'+/-'" />
+            <PSNumpadInputButton value="'0'" />
+            <PSNumpadInputButton value="decimalPoint" />
+            <PSNumpadInputButton value="'Backspace'">
+                <img src="/point_of_sale/static/src/img/backspace.png" width="24" height="21"
+                    alt="Backspace" />
+            </PSNumpadInputButton>
+        </div>
+    </t>
+
+</templates>

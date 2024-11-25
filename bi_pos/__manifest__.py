@@ -25,7 +25,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        # 'views/pos_hide_button.xml',
+        'views/pos_hide_button.xml',
         'views/views.xml',
         'views/templates.xml',
     ],
@@ -37,8 +37,9 @@
     'application': True,
 
     'assets': {
-        'point_of_sale.assets_common': [
+        'point_of_sale.assets': [
             'bi_pos/static/src/js/hide_price_discount.js',
+            'bi_pos/static/src/xml/wb_sample_button.xml',
         ],
     },
 }
